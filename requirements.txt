@@ -1,0 +1,7 @@
+mage-ai
+pandas
+numpy
+missingno
+scikit-learn
+matplotlib
+seaborn
