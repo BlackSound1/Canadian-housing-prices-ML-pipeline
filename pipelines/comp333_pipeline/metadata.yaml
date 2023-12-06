@@ -2,14 +2,15 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - process_cpi
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
   name: load_CPI
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: data_loader
   upstream_blocks: []
@@ -17,7 +18,8 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - process_gdp
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -32,7 +34,8 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - process_avg_housing_prices
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -152,7 +155,8 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - process_econ_indicators
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -164,6 +168,138 @@ blocks:
   type: data_loader
   upstream_blocks: []
   uuid: load_econ_indicators
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - plot_econ_indicators
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: process_econ_indicators
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_econ_indicators
+  uuid: process_econ_indicators
+- all_upstream_blocks_executed: true
+  color: pink
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: plot_econ_indicators
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - process_econ_indicators
+  uuid: plot_econ_indicators
+- all_upstream_blocks_executed: false
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - plot_cpi
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: process_CPI
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_cpi
+  uuid: process_cpi
+- all_upstream_blocks_executed: false
+  color: pink
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: plot_CPI
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - process_cpi
+  uuid: plot_cpi
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - plot_gdp
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: process_GDP
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_gdp
+  uuid: process_gdp
+- all_upstream_blocks_executed: true
+  color: pink
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: plot_GDP
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - process_gdp
+  uuid: plot_gdp
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - process_avg_housing_prices_type
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: process_avg_housing_prices
+  retry_config: null
+  status: updated
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_avg_housing_prices
+  uuid: process_avg_housing_prices
+- all_upstream_blocks_executed: false
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: process_avg_housing_prices_type
+  retry_config: null
+  status: not_executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - process_avg_housing_prices
+  uuid: process_avg_housing_prices_type
 callbacks: []
 concurrency_config: {}
 conditionals: []
@@ -184,7 +320,7 @@ settings:
 spark_config: {}
 tags: []
 type: python
-updated_at: '2023-12-06T19:44:15+00:00'
+updated_at: '2023-12-06T21:00:58+00:00'
 uuid: comp333_pipeline
 variables:
   FILES_LOCATION: /Documents/_CONCORDIA/_COMP333/COMP333Project/COMP333_Project_Data
