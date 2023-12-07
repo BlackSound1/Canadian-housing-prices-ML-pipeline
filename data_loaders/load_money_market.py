@@ -6,6 +6,8 @@ if 'test' not in globals():
 
 import pandas as pd
 
+
+
 @data_loader
 def load_data_from_file(*args, **kwargs):
     filepath = f"{kwargs['FILES_LOCATION']}/money_market.csv"
@@ -14,7 +16,7 @@ def load_data_from_file(*args, **kwargs):
 
     # Get unique values for Financial market statistics
     print('Unique values for "Financial market statistics":')
-    display(df['Financial market statistics'].unique())
+    print(df['Financial market statistics'].unique())
 
     print()
 

@@ -26,11 +26,3 @@ def transform_custom(CPI_df, *args, **kwargs):
     _ = plt.ylabel('CPI_COMMON')
 
     return None
-
-
-@test
-def test_output(output, *args) -> None:
-    """
-    Template code for testing the output of the block.
-    """
-    assert output is None, 'The output is defined'

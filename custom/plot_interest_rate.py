@@ -25,11 +25,3 @@ def transform_custom(interest_rate_df, *args, **kwargs):
     _ = plt.ylabel('interest rate')
 
     return None
-
-
-@test
-def test_output(output, *args) -> None:
-    """
-    Template code for testing the output of the block.
-    """
-    assert output is None, 'The output is defined'

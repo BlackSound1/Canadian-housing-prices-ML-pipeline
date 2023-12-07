@@ -26,11 +26,3 @@ def transform_custom(GDP_df, *args, **kwargs):
     _ = plt.ylabel('GDP (millions 2012 Constant Price)')
 
     return None
-
-
-@test
-def test_output(output, *args) -> None:
-    """
-    Template code for testing the output of the block.
-    """
-    assert output is None, 'The output is defined'

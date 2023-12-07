@@ -25,11 +25,3 @@ def transform_custom(average_housing_df, *args, **kwargs):
     _ = plt.ylabel('Average price')
 
     return None
-
-
-@test
-def test_output(output, *args) -> None:
-    """
-    Template code for testing the output of the block.
-    """
-    assert output is None, 'The output is defined'

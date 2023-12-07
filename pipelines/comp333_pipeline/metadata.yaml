@@ -25,16 +25,17 @@ blocks:
   language: python
   name: load_CPI
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: data_loader
   upstream_blocks: []
   uuid: load_cpi
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration: {}
   downstream_blocks:
   - plot_cpi
+  - merge_all_data
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -47,7 +48,7 @@ blocks:
   upstream_blocks:
   - load_cpi
   uuid: process_cpi
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: pink
   configuration: {}
   downstream_blocks: []
@@ -57,7 +58,7 @@ blocks:
   language: python
   name: plot_CPI
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: custom
   upstream_blocks:
@@ -99,6 +100,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - plot_gdp
+  - merge_all_data
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -121,7 +123,7 @@ blocks:
   language: python
   name: plot_GDP
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: custom
   upstream_blocks:
@@ -231,6 +233,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - plot_housing_prices
+  - merge_all_data
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -253,7 +256,7 @@ blocks:
   language: python
   name: plot_housing_prices
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: custom
   upstream_blocks:
@@ -295,6 +298,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - plot_interest_rate
+  - merge_all_data
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -317,7 +321,7 @@ blocks:
   language: python
   name: plot_interest_rate
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: custom
   upstream_blocks:
@@ -389,6 +393,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - plot_new_housing_index
+  - merge_all_data
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -411,7 +416,7 @@ blocks:
   language: python
   name: plot_new_housing_index
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: custom
   upstream_blocks:
@@ -453,6 +458,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - plot_num_families
+  - merge_all_data
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -475,7 +481,7 @@ blocks:
   language: python
   name: plot_num_families
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: custom
   upstream_blocks:
@@ -517,6 +523,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - plot_num_immigrants
+  - merge_all_data
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -539,7 +546,7 @@ blocks:
   language: python
   name: plot_num_immigrants
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: custom
   upstream_blocks:
@@ -563,7 +570,8 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - process_populations
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -575,6 +583,40 @@ blocks:
   type: data_loader
   upstream_blocks: []
   uuid: load_population
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - plot_populations
+  - merge_all_data
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: process_populations
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_population
+  uuid: process_populations
+- all_upstream_blocks_executed: true
+  color: pink
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: plot_populations
+  retry_config: null
+  status: updated
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - process_populations
+  uuid: plot_populations
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
@@ -596,6 +638,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - plot_econ_indicators
+  - merge_all_data
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -618,12 +661,100 @@ blocks:
   language: python
   name: plot_econ_indicators
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: custom
   upstream_blocks:
   - process_econ_indicators
   uuid: plot_econ_indicators
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: markdown
+  name: merging
+  retry_config: null
+  status: updated
+  timeout: null
+  type: markdown
+  upstream_blocks: []
+  uuid: merging
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - clean_merged_df
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: merge_all_data
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - process_populations
+  - process_econ_indicators
+  - process_num_families
+  - process_new_housing_price_index
+  - process_interest_rate
+  - process_cpi
+  - process_gdp
+  - process_num_immigrants
+  - process_merged_avg_housing_prices
+  uuid: merge_all_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - predict
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: clean_merged_df
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - merge_all_data
+  uuid: clean_merged_df
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: markdown
+  name: model
+  retry_config: null
+  status: updated
+  timeout: null
+  type: markdown
+  upstream_blocks: []
+  uuid: model
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: predict
+  retry_config: null
+  status: updated
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - clean_merged_df
+  uuid: predict
 callbacks: []
 concurrency_config: {}
 conditionals: []
@@ -644,7 +775,7 @@ settings:
 spark_config: {}
 tags: []
 type: python
-updated_at: '2023-12-07 00:32:07'
+updated_at: '2023-12-07T18:53:46+00:00'
 uuid: comp333_pipeline
 variables:
   FILES_LOCATION: /Documents/_CONCORDIA/_COMP333/COMP333Project/COMP333_Project_Data

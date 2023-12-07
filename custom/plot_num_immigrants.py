@@ -26,11 +26,3 @@ def transform_custom(number_of_immigrants_df, *args, **kwargs):
     _ = plt.ylabel('Number of immigrants')
 
     return None
-
-
-@test
-def test_output(output, *args) -> None:
-    """
-    Template code for testing the output of the block.
-    """
-    assert output is None, 'The output is defined'
