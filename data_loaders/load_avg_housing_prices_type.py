@@ -8,7 +8,7 @@ import pandas as pd
 
 @data_loader
 def load_data_from_file(*args, **kwargs):
-    filepath = f"{kwargs['FILES_LOCATION']}/average_housing_prices_type.csv"
+    filepath = f"{kwargs['FILES_LOCATION']}/housing_prices_type.csv"
 
     df = pd.read_csv(filepath)
 

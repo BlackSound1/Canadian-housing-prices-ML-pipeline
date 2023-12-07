@@ -12,6 +12,12 @@ def load_data_from_file(*args, **kwargs):
 
     df = pd.read_csv(filepath)
 
+    # Get unique values for Financial market statistics
+    print('Unique values for "Financial market statistics":')
+    display(df['Financial market statistics'].unique())
+
+    print()
+
     return df
 
 

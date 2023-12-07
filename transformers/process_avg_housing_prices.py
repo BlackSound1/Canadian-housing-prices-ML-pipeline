@@ -9,7 +9,7 @@ import pandas as pd
 @transformer
 def transform(average_housing_prices_df, *args, **kwargs):
     # Drop unneeded columns
-    average_housing_prices_df = average_housing_prices_df.iloc[:, [0, 1]]ss
+    average_housing_prices_df = average_housing_prices_df.iloc[:, [0, 1]]
 
     return average_housing_prices_df
 
