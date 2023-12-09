@@ -20,8 +20,8 @@ def transform(new_housing_df, *args, **kwargs):
     )
 
     # Check unnecesary columns
-    print("Redundant columns:")
-    see_redundant(new_housing_df)
+    # print("Redundant columns:")
+    # see_redundant(new_housing_df)
 
     # Drop unnecessary columns
     new_housing_df = (

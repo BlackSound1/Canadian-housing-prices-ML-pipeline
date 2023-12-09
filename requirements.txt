@@ -1,4 +1,4 @@
-mage-ai
+mage-ai[google-cloud-storage]
 pandas
 numpy
 missingno

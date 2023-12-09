@@ -31,6 +31,8 @@ def transform(average_housing_df, *args, **kwargs):
             (average_housing_df['Date'].str[:4].astype(int) >= 2009) &
             (average_housing_df['Date'].str[:4].astype(int) <= 2019)
         ]
+        .reset_index()
+        .drop(columns='index')
     )
     
     return average_housing_df

@@ -42,7 +42,14 @@ def transform(GDP_df, *args, **kwargs):
     GDP_df = GDP_df.drop(columns=['Seasonal adjustment', 'Prices'])
 
     # Keep only data between 2009 and 2019
-    GDP_df = GDP_df[(GDP_df['Date'].str[:4].astype(int) >= 2009) & (GDP_df['Date'].str[:4].astype(int) <= 2019)]
+    GDP_df = (
+        GDP_df[
+            (GDP_df['Date'].str[:4].astype(int) >= 2009) &
+            (GDP_df['Date'].str[:4].astype(int) <= 2019)
+            ]
+        .reset_index()
+        .drop(columns='index')
+    )
 
     return GDP_df
 

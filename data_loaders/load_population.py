@@ -1,18 +1,25 @@
-from mage_ai.io.file import FileIO
+from mage_ai.settings.repo import get_repo_path
+from mage_ai.io.config import ConfigFileLoader
+from mage_ai.io.google_cloud_storage import GoogleCloudStorage
+from os import path
 if 'data_loader' not in globals():
     from mage_ai.data_preparation.decorators import data_loader
 if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
 
-import pandas as pd
 
 @data_loader
 def load_data_from_file(*args, **kwargs):
-    filepath = f"{kwargs['FILES_LOCATION']}/populations.csv"
+    config_path = path.join(get_repo_path(), 'io_config.yaml')
+    config_profile = 'default'
 
-    df = pd.read_csv(filepath)
-
-    return df
+    bucket_name = 'comp333-data'
+    object_key = 'COMP333_Project_Data/populations.csv'
+    
+    return GoogleCloudStorage.with_config(ConfigFileLoader(config_path, config_profile)).load(
+        bucket_name,
+        object_key,
+    )
 
 
 @test
