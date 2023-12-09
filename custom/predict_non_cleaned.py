@@ -27,7 +27,7 @@ def transform_custom(merged_df, *args, **kwargs):
     grid_search.fit(X_train, y_train)
     best_param = grid_search.best_params_
 
-    # TRain the Ridge model using this alpha value
+    # Train the Ridge model using this alpha value
     best_ridge_model = grid_search.best_estimator_
     best_ridge_model.fit(X_train, y_train)
 
