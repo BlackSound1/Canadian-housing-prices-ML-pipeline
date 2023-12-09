@@ -13,8 +13,10 @@
 8. Click on the pipeline `comp333_pipeline`:
    ![img.png](readme_pics/the_pipeline.png)
 9. From the left hand side, click: "Edit Pipeline":
+   
    ![img.png](readme_pics/edit_pipeline.png)
 10. On the right hand side, navigate to the "Secrets" section:
+    
     ![img.png](readme_pics/secrets.png)
 
 11. Create a new secret using the "+ New" button. Call it `PATH`. Set its value to the absolute path on your
