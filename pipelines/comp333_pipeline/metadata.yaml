@@ -743,19 +743,36 @@ blocks:
 - all_upstream_blocks_executed: false
   color: teal
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - export_uncleaned
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
   name: predict_non_cleaned
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: custom
   upstream_blocks:
   - clean_merged_df
   uuid: predict_non_cleaned
+- all_upstream_blocks_executed: false
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_uncleaned
+  retry_config: null
+  status: updated
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - predict_non_cleaned
+  uuid: export_uncleaned
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
@@ -874,7 +891,8 @@ blocks:
 - all_upstream_blocks_executed: false
   color: teal
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - export_cleaned
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -887,6 +905,22 @@ blocks:
   upstream_blocks:
   - min_max_scaling
   uuid: predict_cleaned
+- all_upstream_blocks_executed: false
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_cleaned
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - predict_cleaned
+  uuid: export_cleaned
 callbacks: []
 concurrency_config: {}
 conditionals: []
@@ -907,7 +941,7 @@ settings:
 spark_config: {}
 tags: []
 type: python
-updated_at: '2023-12-11 20:03:14'
+updated_at: '2023-12-11 21:29:49'
 uuid: comp333_pipeline
 variables: {}
 variables_dir: C:\Users\Matthew\.mage_data\COMP333Project

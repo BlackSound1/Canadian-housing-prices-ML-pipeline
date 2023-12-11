@@ -38,13 +38,13 @@ def transform_custom(merged_df_copy, *args, **kwargs):
 
     # Make predictions on the VALIDATION data
     ridge_predict_cleaned = best_ridge_model_cleaned.predict(Xc_val)
-    rmse_cleaned = round(mean_squared_error(yc_val, ridge_predict_cleaned, squared=False), 2)
-    print(f"The Ridge model has an RMSE of: {rmse_cleaned} with the VALIDATION data")
+    rmse_cleaned1 = round(mean_squared_error(yc_val, ridge_predict_cleaned, squared=False), 2)
+    print(f"The Ridge model has an RMSE of: {rmse_cleaned1} with the VALIDATION data")
 
     # Make predictions on the TESTING data
     ridge_predict_cleaned = best_ridge_model_cleaned.predict(Xc_test)
-    rmse_cleaned = round(mean_squared_error(yc_test, ridge_predict_cleaned, squared=False), 2)
-    print(f"The Ridge model has an RMSE of: {rmse_cleaned} with the TESTING data")
+    rmse_cleaned2 = round(mean_squared_error(yc_test, ridge_predict_cleaned, squared=False), 2)
+    print(f"The Ridge model has an RMSE of: {rmse_cleaned2} with the TESTING data")
 
     avg_of_Average_price_cleaned = round(merged_df_copy['Average price'].mean(), 2)
     print(f"Note that the average housing price is: {avg_of_Average_price_cleaned}\n")
@@ -67,18 +67,26 @@ def transform_custom(merged_df_copy, *args, **kwargs):
                 0.5, 1927305.0, 488100, 742100, 527000, 439800, 0.5,
                 106.5, 10330000, 226309, 38007166]]
     test_df_2020 = pd.DataFrame(data=l_2020, columns=columns_)
-    print(f"Non-cleaned predicted value for 2020-09: {round(list(best_ridge_model_cleaned.predict(test_df_2020))[0], 2)}. Actual value for 2020-09: 601193.53")
+    pred_val_2020 = round(list(best_ridge_model_cleaned.predict(test_df_2020))[0], 2)
+    print(f"Non-cleaned predicted value for 2020-09: {pred_val_2020}. Actual value for 2020-09: 601193.53")
 
     l_2021 = [[date_numeric('2021-09'), 5, 7.6, 4.6, 3.1, 2.6, 7.1, 1.3, 79.9, 5.9, 1.4, 4.2,
                3.7, 66, 3.5, 3.7, 3.5, 3.1, 3, 3.5, 3.2, 4.4, 2009220,618200, 927600,
                645200, 498700, 0.5, 118.5, 10470000, 226309, 38226498]]
     test_df_2021 = pd.DataFrame(data=l_2021, columns=columns_)
-    print(f"Non-cleaned predicted value for 2021-09: {round(list(best_ridge_model_cleaned.predict(test_df_2021))[0], 2)}. Actual value for 2021-09: 684798.12")
+    pred_val_2021 = round(list(best_ridge_model_cleaned.predict(test_df_2021))[0], 2)
+    print(f"Non-cleaned predicted value for 2021-09: {pred_val_2021}. Actual value for 2021-09: 684798.12")
 
     l_2022 = [[date_numeric('2022-09'), 3.2, 5.4, 3.5, 6.8, 5.4, 8.3, 2.8, 77.9, 1.7, 2.8, 7.9,
                7.1, 97, 7.1, 6, 6, 6, 5, 5.3, 5.4, 6.9, 2078250, 625200, 953100,
                687400, 544800, 1.25, 126, 10610000, 492984, 38929902]]
     test_df_2022 = pd.DataFrame(data=l_2022, columns=columns_)
-    print(f"Non-cleaned predicted value for 2022-09: {round(list(best_ridge_model_cleaned.predict(test_df_2022))[0], 2)}. Actual value for 2022-09: 639485.32")
+    pred_val_2022 = round(list(best_ridge_model_cleaned.predict(test_df_2022))[0], 2)
+    print(f"Non-cleaned predicted value for 2022-09: {pred_val_2022}. Actual value for 2022-09: 639485.32")
 
-    return None
+    rmse_data = {'rmse_cleaned_val': rmse_cleaned1, 'rmse_cleaned_test': rmse_cleaned2}
+    price_data = {"Date": ['2020-09', '2021-09', '2022-09'],
+                  'Predicted Values': [pred_val_2020, pred_val_2021, pred_val_2022],
+                  'Actual Values': ['601193.53', '684798.12', '639485.32']}
+
+    return [rmse_data, price_data]
