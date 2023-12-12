@@ -915,7 +915,7 @@ blocks:
   language: python
   name: export_cleaned
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: data_exporter
   upstream_blocks:
@@ -941,7 +941,7 @@ settings:
 spark_config: {}
 tags: []
 type: python
-updated_at: '2023-12-11 21:29:49'
+updated_at: '2023-12-12T01:15:38+00:00'
 uuid: comp333_pipeline
 variables: {}
 variables_dir: C:\Users\Matthew\.mage_data\COMP333Project

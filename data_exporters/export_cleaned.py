@@ -3,6 +3,7 @@ from mage_ai.io.config import ConfigFileLoader
 from mage_ai.io.google_cloud_storage import GoogleCloudStorage
 import pandas as pd
 from os import path
+from datetime import datetime
 
 if 'data_exporter' not in globals():
     from mage_ai.data_preparation.decorators import data_exporter
@@ -10,7 +11,10 @@ if 'data_exporter' not in globals():
 
 @data_exporter
 def export_data_to_google_cloud_storage(data: list, **kwargs) -> None:
-    
+    # Get the current datetime
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d--%H:%M:%S')
+
     # Get the respective data
     rmse_data = data[0]
     price_data = data[1]
@@ -23,7 +27,7 @@ def export_data_to_google_cloud_storage(data: list, **kwargs) -> None:
     config_profile = 'default'
 
     bucket_name = 'comp333-data'
-    object_key = 'Results/Cleaned/RMSE_data.json'
+    object_key = f'Results/Cleaned/RMSE_data-{now}.json'
 
     GoogleCloudStorage.with_config(ConfigFileLoader(config_path, config_profile)).export(
         rmse_data,
@@ -31,7 +35,7 @@ def export_data_to_google_cloud_storage(data: list, **kwargs) -> None:
         object_key,
     )
 
-    object_key = 'Results/Cleaned/price_data.json'
+    object_key = f'Results/Cleaned/price_data-{now}.json'
 
     GoogleCloudStorage.with_config(ConfigFileLoader(config_path, config_profile)).export(
         price_data,
