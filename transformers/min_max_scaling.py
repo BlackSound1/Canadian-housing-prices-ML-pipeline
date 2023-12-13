@@ -35,9 +35,11 @@ def min_max(col: pd.Series) -> pd.Series:
 
 @transformer
 def transform(merged_df_copy, *args, **kwargs):
+    cols_to_ignore = ['Date', 'GDP (millions 2012 Constant Price)', 'Average price', 'One storey price', 'Two storey price',
+                      'Townhouse price', 'Apartment price', 'Number of families', 'Number of immigrants', 'Population']
     
     # For each of the columns, min_max scale their values
-    for c in [i for i in merged_df_copy.columns if i != "Date"]:
+    for c in [i for i in merged_df_copy.columns if i not in cols_to_ignore]:
         merged_df_copy[c] = min_max(merged_df_copy[c])
 
     return merged_df_copy
