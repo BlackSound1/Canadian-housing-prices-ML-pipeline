@@ -1,7 +1,7 @@
-mage-ai[google-cloud-storage]
-pandas
-numpy
-missingno
-scikit-learn
-matplotlib
-seaborn
+mage-ai[google-cloud-storage]==0.9.47
+pandas==2.0.3
+numpy==1.25.2
+missingno==0.5.2
+scikit-learn==1.2.2
+matplotlib==3.7.2
+seaborn==0.12.2
