@@ -1,4 +1,7 @@
-# COMP333Project
+# Canadian Housing Prices ML Pipeline
+
+**Note:** This project requires GCP credentials that are not public and are no longer valid. The following instructions were for internal use only.
+This repo is maintained for portfolio purposes only.
 
 ## Setup
 
