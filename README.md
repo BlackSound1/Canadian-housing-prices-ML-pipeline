@@ -3,6 +3,8 @@
 **Note:** This project requires GCP credentials that are not public and are no longer valid. The following instructions were for internal use only.
 This repo is maintained for portfolio purposes only.
 
+A demo video showing the pipelines capabilities can be viewed here: https://www.youtube.com/watch?v=ZQttMPyt1t8.
+
 ## Setup
 
 1. Download the `keen-diode-...json` file from Discord and save it somewhere on your system. You will need it.
